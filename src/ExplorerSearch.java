@@ -34,6 +34,16 @@ public class ExplorerSearch {
         // I STRONGLY RECOMMEND testing some helpers you might make too
         return -1;
     }
+    private static int reachableArea(int[][] island, int[]current, boolean[][] visited, int total){
+        if(visited[current[0]][current[1]]) return 0;
+        visited[current[0]][current[1]]=true;
+        List<int[]> neighbors = possibleMoves(island, current);
+        for(int[] neighbor: neighbors){
+            total=reachableArea(island,neighbor,visited,total+1);
+        }
+        return total;
+    }
+
     public static List<int[]> possibleMoves(int[][] island, int[] current){
         int r= current[0];
         int c= current[1];
