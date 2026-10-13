@@ -34,6 +34,38 @@ public class ExplorerSearch {
         // I STRONGLY RECOMMEND testing some helpers you might make too
         return -1;
     }
+    public static List<int[]> possibleMoves(int[][] island, int[] current){
+        int r= current[0];
+        int c= current[1];
+        
+        int newR, newC;
+        List<int[]> possible = new ArrayList<>();
+
+        newR= r-1;
+        newC = c;
+        if(newR>=0&& island[newR][newC]==1){
+            possible.add(new int[]{newC,newR});
+        }
+        //
+        newR = r - 1;
+        newC = c;
+        if (newR <island.length && island[newR][newC] == 1) {
+            possible.add(new int[] { newC, newR });
+        }
+        //
+        newR = r - 1;
+        newC = c;
+        if (newC >= 0 && island[newR][newC] == 1) {
+            possible.add(new int[] { newC, newR });
+        }
+        //
+        newR = r ;
+        newC = c+1;
+        if (newC<island[newR].length  && island[newR][newC] == 1) {
+            possible.add(new int[] { newC, newR });
+        }
+        return possible;
+    }
     public static int[] starterFinder(int[][] island){
         for(int row=0; row<island.length;row++){
             for(int col=0;col<island[row].length;col++){
