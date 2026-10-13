@@ -29,17 +29,15 @@ public class ExplorerSearch {
      * @return the number of spaces the explorer can reach
      */
     public static int reachableArea(int[][] island) {
-        // Implement your method here!
-        // Please also make more test cases
-        // I STRONGLY RECOMMEND testing some helpers you might make too
-        return -1;
+        return reachableArea(island,starterFinder(island),new boolean[island.length][island[0].length] );
     }
-    private static int reachableArea(int[][] island, int[]current, boolean[][] visited, int total){
+    private static int reachableArea(int[][] island, int[]current, boolean[][] visited){
         if(visited[current[0]][current[1]]) return 0;
         visited[current[0]][current[1]]=true;
+        int total=1;
         List<int[]> neighbors = possibleMoves(island, current);
         for(int[] neighbor: neighbors){
-            total=reachableArea(island,neighbor,visited,total+1);
+         total+= reachableArea(island,neighbor,visited);
         }
         return total;
     }
@@ -54,25 +52,25 @@ public class ExplorerSearch {
         newR= r-1;
         newC = c;
         if(newR>=0&& island[newR][newC]==1){
-            possible.add(new int[]{newC,newR});
+            possible.add(new int[]{newR,newC});
         }
         //
-        newR = r - 1;
+        newR = r+1;
         newC = c;
         if (newR <island.length && island[newR][newC] == 1) {
-            possible.add(new int[] { newC, newR });
+            possible.add(new int[] { newR, newC });
         }
         //
-        newR = r - 1;
-        newC = c;
+        newR = r;
+        newC = c-1;
         if (newC >= 0 && island[newR][newC] == 1) {
-            possible.add(new int[] { newC, newR });
+            possible.add(new int[] { newR, newC });
         }
         //
         newR = r ;
         newC = c+1;
         if (newC<island[newR].length  && island[newR][newC] == 1) {
-            possible.add(new int[] { newC, newR });
+            possible.add(new int[] { newR, newC });
         }
         return possible;
     }
